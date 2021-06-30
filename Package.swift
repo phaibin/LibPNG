@@ -22,7 +22,7 @@ var cSettings: [CSetting]? {
     settings.append(.define("Z_HAVE_UNISTD_H"))
     #endif
     
-    settings.append(.unsafeFlags(["-Ofast", "-march=native"], .when(configuration: .release)))
+    settings.append(.unsafeFlags(["-Ofast"], .when(configuration: .release)))
     return settings
 }
 
