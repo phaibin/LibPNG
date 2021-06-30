@@ -21,8 +21,9 @@ var cSettings: [CSetting]? {
     #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
     settings.append(.define("Z_HAVE_UNISTD_H"))
     #endif
-
-    return settings.isEmpty ? nil : settings
+    
+    settings.append(.unsafeFlags(["-Ofast", "-march=native"], .when(configuration: .release)))
+    return settings
 }
 
 let package = Package(
@@ -35,5 +36,6 @@ let package = Package(
                 path: "./Sources/LibPNG",
                 publicHeadersPath: "Include",
                 cSettings: cSettings),
-    ]
+    ],
+    cLanguageStandard: .gnu11
 )
